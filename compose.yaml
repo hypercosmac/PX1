@@ -1,0 +1,31 @@
+services:
+  ollama-service:
+    container_name: ollama_pi_local
+    image: ollama/ollama:latest
+    volumes:
+      - ./ollama:/root/.ollama
+    ports:
+      - 11434:11434
+
+  download-model:
+    image: curlimages/curl:8.6.0
+    entrypoint: ["curl", "ollama-service:11434/api/pull", "-d", '{"name": "tinydolphin"}']
+    depends_on:
+      ollama-service:
+        condition: service_started
+
+  python-environment:
+    profiles: [demo]
+    build:
+      context: ./.docker/langchain-python
+      dockerfile: Dockerfile
+    container_name: python-demo
+    depends_on:
+      ollama-service:
+        condition: service_started
+    environment:
+      - OLLAMA_BASE_URL=http://ollama-service:11434
+    volumes:
+      - ./python-demo:/python-demo
+    ports:
+      - 8000:8000
