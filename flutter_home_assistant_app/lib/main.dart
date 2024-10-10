@@ -64,6 +64,19 @@ class _AlertSettingsPageState extends State<AlertSettingsPage> {
               'Choose when you want to be alerted:',
               style: TextStyle(fontSize: 20),
             ),
+            SizedBox(height: 10),
+            TextField(
+              controller: _newAlertController,
+              decoration: InputDecoration(
+                labelText: 'Add a new alert',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: _addNewAlert,
+              child: Text('Add Alert'),
+            ),
             SizedBox(height: 20),
             Expanded(
               child: ListView(
@@ -84,22 +97,17 @@ class _AlertSettingsPageState extends State<AlertSettingsPage> {
                 }).toList(),
               ),
             ),
-            TextField(
-              controller: _newAlertController,
-              decoration: InputDecoration(
-                labelText: 'Add a new alert',
-                border: OutlineInputBorder(),
+            Center(
+              child: ElevatedButton(
+                onPressed: _saveSettings,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.purple[100], // Light purple color
+                ),
+                child: Text(
+                  'Save Settings',
+                  style: TextStyle(color: Colors.black), // White text color
+                ),
               ),
-            ),
-            SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: _addNewAlert,
-              child: Text('Add Alert'),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _saveSettings,
-              child: Text('Save Settings'),
             ),
           ],
         ),
