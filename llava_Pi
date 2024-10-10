@@ -1,0 +1,24 @@
+import ollama
+from flask import Flask, request
+
+app = Flask(__name__)
+
+@app.route('/get_message', methods=['POST'])
+def get_message():
+    message = request.json.get('message', '')
+    return message
+
+def get_message_from_mobile():
+    return app.test_client().post('/get_message', json={'message': 'Default message'}).get_data(as_text=True)
+
+message_from_mobile = get_message_from_mobile()
+
+res = ollama.chat(
+    model="llava",
+    messages=[{
+        'role': 'user',
+        'content': message_from_mobile,
+        'images': ['./path_to_your_image.jpg']
+    }]
+)
+print(res['message']['content'])
