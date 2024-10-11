@@ -16,6 +16,10 @@ WHITE = (255, 255, 255)
 CYAN_GREEN = (0, 255, 200)
 BLUE = (0, 122, 255)
 PURPLE = (128, 0, 128)
+ORANGE = (205, 165, 40)
+GREEN = (0, 255, 0)
+RED = (255, 0, 0)
+GRAY = (128, 128, 128)  # Added gray color for the quit button
 
 # Font
 font = pygame.font.Font(None, 36)
@@ -37,9 +41,13 @@ class AppIcon:
 # Create app icons
 apps = [
     AppIcon(50, 50, 150, 150, CYAN_GREEN, "Eyes", ["python3", "screensaver.py"]),
-    AppIcon(250, 50, 150, 150, (100, 100, 255), "Orchard Nav", ["x-terminal-emulator", "-e", "bash", "-c", "cd hailo && source setup_env.sh && python3 basic_pipelines/detection.py --labels-json resources/zaptrack-labels.json --hef zaptrack-2024-10-08.hef -i rpi"]),
-    AppIcon(450, 50, 150, 150, BLUE, "Pose", ["x-terminal-emulator", "-e", "rpicam-hello", "-t", "0s", "--post-process-file", "/usr/share/rpi-camera-assets/imx500_posenet.json", "--viewfinder-width", "1920", "--viewfinder-height", "1080", "--framerate", "30"]),
-    AppIcon(650, 50, 150, 150, PURPLE, "People", ["x-terminal-emulator", "-e", "rpicam-hello", "-t", "0s", "--post-process-file", "/usr/share/rpi-camera-assets/imx500_mobilenet_ssd.json", "--viewfinder-width", "1920", "--viewfinder-height", "1080", "--framerate", "30"])
+    AppIcon(250, 50, 150, 150, (100, 100, 255), "OrchardNav", ["x-terminal-emulator", "-e", "bash", "-c", "cd hailo && source setup_env.sh && python3 basic_pipelines/detection.py --labels-json resources/zaptrack-labels.json --hef zaptrack-2024-10-08.hef -i rpi"]),
+    AppIcon(450, 50, 150, 150, BLUE, "Pose", ["x-terminal-emulator", "-e", "rpicam-hello", "-t", "0s", "--post-process-file", "/usr/share/rpi-camera-assets/imx500_posenet.json", "--viewfinder-width", "1920", "--viewfinder-height", "1080", "--framerate", "30", "--rotation", "180"]),
+    AppIcon(650, 50, 150, 150, PURPLE, "People", ["x-terminal-emulator", "-e", "rpicam-hello", "-t", "0s", "--post-process-file", "/usr/share/rpi-camera-assets/imx500_mobilenet_ssd.json", "--viewfinder-width", "1920", "--viewfinder-height", "1080", "--framerate", "30", "--rotation", "180"]),
+    AppIcon(50, 250, 150, 150, ORANGE, "DishDash", ["python3", "dishdash.py"]),
+    AppIcon(250, 250, 150, 150, GREEN, "AutoHome", ["python3", "cookstreak.py"]),
+    AppIcon(450, 250, 150, 150, RED, "FallSense", ["python3", "fallsense.py"]),
+    AppIcon(650, 250, 150, 150, GRAY, "Quit", None)
 ]
 
 # Main loop
