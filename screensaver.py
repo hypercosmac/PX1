@@ -14,7 +14,7 @@ BLACK = (0, 0, 0)
 CYAN_GREEN = (0, 255, 200)
 
 # Eye properties
-eye_size = min(width, height) // 4
+eye_size = min(width, height) // 2  # Increased eye size for higher resolution
 eye_distance = eye_size * 1.5
 
 # Eye positions
@@ -47,8 +47,10 @@ def draw_eye(surface, center, time):
 running = True
 start_time = pygame.time.get_ticks()
 
-# Create a surface for anti-aliasing
-aa_surface = pygame.Surface((width, height), pygame.SRCALPHA)
+# Create a high-resolution surface for rendering
+render_scale = 1  # Increase this for even higher resolution
+render_width, render_height = width * render_scale, height * render_scale
+render_surface = pygame.Surface((render_width, render_height))
 
 while running:
     for event in pygame.event.get():
@@ -57,21 +59,24 @@ while running:
         elif event.type == pygame.MOUSEBUTTONDOWN:
             running = False
 
-    aa_surface.fill((0, 0, 0, 0))  # Clear with transparent black
+    render_surface.fill(BLACK)
 
     current_time = (pygame.time.get_ticks() - start_time) / 1000  # Time in seconds
 
-    # Draw eyes on the anti-aliasing surface
-    draw_eye(aa_surface, left_eye_pos, current_time)
-    draw_eye(aa_surface, right_eye_pos, current_time)
+    # Scale up eye positions and size for the render surface
+    scaled_left_eye_pos = (left_eye_pos[0] * render_scale, left_eye_pos[1] * render_scale)
+    scaled_right_eye_pos = (right_eye_pos[0] * render_scale, right_eye_pos[1] * render_scale)
+    scaled_eye_size = eye_size * render_scale
 
-    # Scale down and up for anti-aliasing effect
-    small_surface = pygame.transform.smoothscale(aa_surface, (width // 2, height // 2))
-    smooth_surface = pygame.transform.smoothscale(small_surface, (width, height))
+    # Draw eyes on the high-resolution render surface
+    draw_eye(render_surface, scaled_left_eye_pos, current_time)
+    draw_eye(render_surface, scaled_right_eye_pos, current_time)
+
+    # Scale down the render surface to the screen size with anti-aliasing
+    scaled_surface = pygame.transform.smoothscale(render_surface, (width, height))
 
     # Draw the final result on the screen
-    screen.fill(BLACK)
-    screen.blit(smooth_surface, (0, 0))
+    screen.blit(scaled_surface, (0, 0))
 
     pygame.display.flip()
     clock.tick(60)  # 60 FPS for smooth animation
