@@ -46,6 +46,7 @@ Price: $299
 
 Features:
 - Lightweight live-inference camera module
+- Will only be shipped in 2025
 
 Price: $149
 
