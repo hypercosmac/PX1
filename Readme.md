@@ -60,7 +60,7 @@ Developer kits will start shipping in November 2024, and mass-manufactured consu
 1. **Gather Components**: 
    - Raspberry Pi 5
    - AI Camera module and/or AI kit
-   - 3D-printed case (STL files provided in `/case` directory)
+   - 3D-printed case (STL and STEO files will be provided in `/CAD` directory)
    - Power supply
 
 2. **Assembly**:
@@ -73,11 +73,21 @@ Developer kits will start shipping in November 2024, and mass-manufactured consu
    - Insert the SD card into the Raspberry Pi and power on
    - Follow the on-screen instructions for initial setup
 
-## Usage
+**Bill of Materials**
 
-1. Access the OPX1 web interface by navigating to `http://<OPX1-IP-ADDRESS>` in your browser
-2. Use the interface to configure your device and set up monitoring rules
-3. Train the AI model using the provided tools for your specific use case
+| Component | Quantity | Price Each | Total Price |
+| --- | --- | --- | --- |
+| Raspberry Pi 5 8 GB | 1 | $80 | $80 |
+| Raspberry Pi AI Kit | 1 | $70 | $70 |
+| Raspberry Pi AI Camera | 1 | $70 | $70 |
+| Touchscreen Monitor 5 inch | 1 | $40 | $40 |
+| USB Mic | 1 | $4 | $4 |
+| Speaker | 1 | $10 | $10 |
+| 3D-printed case | 1 | $10 | $10 |
+| Power Supply | 1 | $10 | $10 |
+| MicroSD Card | 1 | $15 | $15 | 
+
+Total Cost: $359
 
 ## Applications
 
